@@ -13,10 +13,63 @@ import com.darenzai.newfeatures.stream.*;
         public static void main(String[] args) {
             List<Author> authors = getAuthors();
             Stream<Author> stream = authors.stream();
-            test02();
-
+            //test02();
+            //test04();
             //test0(authors);
+            //test05();
+            //test06();
+            //test07();
+            test08();
+        }
+        //limit 可以设置流的最大长度，超出的部分将被抛弃。
+        public static void test08(){
+            getAuthors().stream()
+                    .distinct()
+                    .sorted()
+                    .limit(2)
+                    .forEach(author -> System.out.println(author.getName()));
+        }
 
+
+
+        // sorted 对流中的元素按照年龄进行降序排序，并且要求不能有重复的元素。
+         public static void test06(){
+             List<Integer> collect = getAuthors().stream()
+                     .distinct()
+                     .map(age -> age.getAge()+20)
+                     .sorted()
+                     .collect(Collectors.toList());
+             collect.forEach(str-> System.out.println(str));
+
+         }
+         //        对流中的元素按照年龄进行降序排序，并且要求不能有重复的元素。
+         public static void test07(){
+            getAuthors().stream()
+                    .distinct()
+                    .map(author -> author.getAge()+30)
+                    .sorted((o1, o2) -> o2-o1)
+                    .forEach(author -> System.out.println(author));
+         }
+
+        // map
+        private static void test05(){
+            getAuthors().stream()
+                    .map(author -> author.getAge())
+                    .map(age ->age+10)
+                    .forEach(age -> System.out.println(age));
+
+        }
+        // filter
+        private static void test04(){
+            List<Author> authors = getAuthors();
+            authors.stream()
+                    .filter(author -> author.getName().length()>1)
+                    .forEach(new Consumer<Author>() {
+                        @Override
+                        public void accept(Author author) {
+                            System.out.println(author.getName());
+                        }
+                    });
 
         }
 
