@@ -50,7 +50,6 @@ import com.darenzai.newfeatures.stream.*;
                     .sorted((o1, o2) -> o2-o1)
                     .forEach(author -> System.out.println(author));
          }
-
         // map
         private static void test05(){
             getAuthors().stream()
